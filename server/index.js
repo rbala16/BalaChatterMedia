@@ -10,6 +10,7 @@ import path from "path";  //comes with node modules so we donot have to install 
 import { fileURLToPath } from "url"; //convert a file URL to a file path
 import { register } from "./controllers/auth.js";
 import authRoutes from "./routes/auth.js";
+import userRoutes from "./routes/users.js";
 
 // CONFIGURATIONS
 const __filename = fileURLToPath(import.meta.url);
@@ -42,6 +43,8 @@ app.post("/auth/register",upload.single("picture"),verifyToken,register);
 
 //routes 
 app.use("/auth",authRoutes);
+app.use("/users",userRoutes);
+
 
 // Mongoose setup
 const PORT = process.env.PORT || 6001;
