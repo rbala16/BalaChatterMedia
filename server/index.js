@@ -9,6 +9,7 @@ import morgan from "morgan";
 import path from "path";  //comes with node modules so we donot have to install it
 import { fileURLToPath } from "url"; //convert a file URL to a file path
 import { error } from "console";
+import { register } from "./controllers/auth.js";
 
 // CONFIGURATIONS
 const __filename = fileURLToPath(import.meta.url);
@@ -35,13 +36,13 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
+// Routes with files
+app.post("/auth/register",upload.single("picture"),register);
+
 // Mongoose setup
 const PORT = process.env.PORT || 6001;
 mongoose
-.connect(process.env.MONGO_URL,{
-    useNewUrlParser : true,
-    useUnifiedTopology: true,
-}).then(()=>{
+.connect(process.env.MONGO_URL).then(()=>{
     app.listen(PORT,() => console.log(`Server Port: ${PORT}`));
     })
     .catch((error)=> console.log(`${error} did not connect`));
