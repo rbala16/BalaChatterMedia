@@ -1,6 +1,7 @@
 import Post from "../models/Post.js";
+import User from "../models/User.js";
 // Create
- export const CreatePost = async(req,res)=>{
+ export const createPost = async(req,res)=>{
     try{
      const {userId,description,picturePath} = req.body;
      const user = await User.findbyId(userId);
@@ -49,7 +50,7 @@ export const getUserPosts = async(req,res)=>{
 }
 
 // update
-export default likePost = async(req,res)=>{
+export const likePost = async(req,res)=>{
    try{
     const {id} = req.params; //query string
     const {userId} = req.body;
