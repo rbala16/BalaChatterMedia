@@ -47,7 +47,7 @@ import {
   };
 
   const Form = ()=>{
-  const [pageType,setPageType] = useState("Login");
+  const [pageType,setPageType] = useState("login");
   const {palette} = useTheme();
   const dispatch = useDispatch();
   const navigate = useNavigate();
