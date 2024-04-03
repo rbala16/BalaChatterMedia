@@ -135,3 +135,5 @@ const UserWidget = ({ userId, picturePath }) => {
     </WidgetWrapper>
   );
 };
+
+export default UserWidget;
