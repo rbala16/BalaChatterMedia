@@ -8,13 +8,13 @@ import { Box, Typography, Divider, useTheme } from "@mui/material";
 import UserImage from "components/UserImage";
 import FlexBetween from "components/FlexBetween";
 import WidgetWrapper from "components/WidgetWrapper";
-import { UseSelector, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const UserWidget = ({ userId, picturePath }) => {
   const [user, setUser] = useState(null);
-  const [palette] = useTheme();
+  const {palette} = useTheme();
   const navigate = useNavigate();
   const token = useSelector((state) => state.token);
   const dark = palette.neutral.dark;
@@ -28,6 +28,7 @@ const UserWidget = ({ userId, picturePath }) => {
     });
     const data = await response.json();
     setUser(data);
+    console.log(data)
   };
   useEffect(() => {
     getUser();
@@ -69,9 +70,14 @@ const UserWidget = ({ userId, picturePath }) => {
               {firstName}
               {lastName}
             </Typography>
-            <Typography color={medium}>{friends.length} friends</Typography>
+            <Typography color={medium}>
+            {friends ? (friends.length > 0 ? `${friends.length} friends` : "No friends") : ""}
+           </Typography>
+
           </Box>
-          <ManageAccountsOutlined />
+      
+        </FlexBetween>
+        <ManageAccountsOutlined />
         </FlexBetween>
         <Divider />
         {/* Second row */}
@@ -98,6 +104,7 @@ const UserWidget = ({ userId, picturePath }) => {
               {impressions}</Typography>
           </FlexBetween>
         </Box>
+        <Divider />
         {/* Fourth row */}
         <Box p ="1rem 0">
         <Typography fontSize="1rem" color={main} fontWeight="500" mb="1rem">
@@ -131,7 +138,7 @@ const UserWidget = ({ userId, picturePath }) => {
         </FlexBetween>
 
         </Box>
-      </FlexBetween>
+    
     </WidgetWrapper>
   );
 };
